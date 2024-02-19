@@ -13,16 +13,14 @@ export const getProducts = async () => {
     )
     const { products } = await res.json()
 
-    const data: Product[] = products.map((product: ShopifyProduct) => {
-      return {
-        id: product.id,
-        title: product.title,
-        description: product.body_html,
-        price: product.variants[0].price,
-        tags: product.tags,
-        image: product.images[0].src,
-      }
-    })
+    const data: Product[] = products.map((product: ShopifyProduct) => ({
+      id: product.id,
+      title: product.title,
+      description: product.body_html,
+      price: product.variants[0].price,
+      tags: product.tags,
+      image: product.images[0].src,
+    }))
 
     return data
   } catch (error) {
