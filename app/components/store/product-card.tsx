@@ -1,13 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
 import type { Product } from '@/app/types/Product'
 export default function CardComponent({ product }: { product: Product }) {
+  const handle = product.title.toLowerCase().replace(/ /g, '-')
   return (
-    <a href="#" className="group block overflow-hidden">
+    <a href={`/products/${handle}`} className="group block overflow-hidden">
       <div className="relative h-[250px] sm:h-[350px]">
         <img
           src={product.image}
           alt={product.title}
-          className="absolute inset-0 h-full w-fulsl object-cover ospacity-100 "
+          className="absolute inset-0 h-full w-full rounded object-cover ospacity-100 "
         />
       </div>
 

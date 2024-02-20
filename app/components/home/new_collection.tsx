@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { getProducts } from '@/app/services/products'
 
 export async function NewCollection() {

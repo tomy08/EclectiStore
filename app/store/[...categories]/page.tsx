@@ -1,14 +1,12 @@
 import ProductWrapper from '@/app/components/store/product-wrapper'
 import Card from '@/app/components/store/product-card'
 
-import { getProducts } from '@/app/services/products'
 import {
   getCollectionProducts,
   getCollections,
 } from '@/app/services/collections'
 
 import { Collection } from '@/app/types/Collection'
-import { Product } from '@/app/types/Product'
 
 interface CategoryProps {
   params: {

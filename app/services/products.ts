@@ -1,16 +1,18 @@
 import type { Product } from '../types/Product'
 import type { ShopifyProduct } from '../types/ShopifyProduct'
 
-export const getProducts = async () => {
+export const getProducts = async (id?: string) => {
   try {
-    const res = await fetch(
-      `${process.env.SHOPIFY_HOSTNAME}/admin/api/2024-01/products.json`,
-      {
-        headers: {
-          'X-Shopify-Access-Token': process.env.SHOPIFY_API_KEY || '',
-        },
-      }
-    )
+    const apiUrl = id
+      ? `${process.env.SHOPIFY_HOSTNAME}/admin/api/2024-01/products.json?ids=${id}`
+      : `${process.env.SHOPIFY_HOSTNAME}/admin/api/2024-01/products.json`
+
+    const res = await fetch(apiUrl, {
+      headers: {
+        'X-Shopify-Access-Token': process.env.SHOPIFY_API_KEY || '',
+      },
+    })
+
     const { products } = await res.json()
 
     const data: Product[] = products.map((product: ShopifyProduct) => ({
