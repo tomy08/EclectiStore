@@ -8,7 +8,7 @@ export function Header() {
           <nav aria-label="Global">
             <ul className="flex items-center gap-6 text-sm">
               <List name="Home" href="/" />
-              <List name="Store" href="./store" />
+              <List name="Store" href="/store" />
             </ul>
           </nav>
 

@@ -29,3 +29,29 @@ export const getProducts = async (id?: string) => {
     console.error(error)
   }
 }
+
+export const getMainProducts = async () => {
+  try {
+    const apiUrl = `${process.env.SHOPIFY_HOSTNAME}/admin/api/2024-01/collections/430486520038/products.json`
+
+    const res = await fetch(apiUrl, {
+      headers: {
+        'X-Shopify-Access-Token': process.env.SHOPIFY_API_KEY || '',
+      },
+    })
+
+    const { products } = await res.json()
+
+    const data: Product[] = products.map((product: ShopifyProduct) => ({
+      id: product.id,
+      title: product.title,
+      description: product.body_html,
+      tags: product.tags,
+      image: product.images[0].src,
+    }))
+
+    return data
+  } catch (error) {
+    console.error(error)
+  }
+}

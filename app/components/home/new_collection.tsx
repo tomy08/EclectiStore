@@ -1,11 +1,14 @@
-import { getProducts } from '@/app/services/products'
+import { getMainProducts } from '@/app/services/products'
 
 export async function NewCollection() {
-  const products = await getProducts()
+  const products = await getMainProducts()
 
   if (!products) {
     return null
   }
+  const handles = products!.map(
+    (product) => `products/${product.title.toLowerCase().replace(/ /g, '-')}`
+  )
 
   return (
     <section>
@@ -22,7 +25,7 @@ export async function NewCollection() {
 
         <ul className="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3">
           <li>
-            <a href="#" className="group relative block">
+            <a href={handles[0]} className="group relative block">
               <img
                 src={products[0].image}
                 alt={products[0].title}
@@ -42,7 +45,7 @@ export async function NewCollection() {
           </li>
 
           <li>
-            <a href="#" className="group relative block">
+            <a href={handles[1]} className="group relative block">
               <img
                 src={products[1].image}
                 alt={products[1].title}
@@ -62,7 +65,7 @@ export async function NewCollection() {
           </li>
 
           <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-            <a href="#" className="group relative block">
+            <a href={handles[2]} className="group relative block">
               <img
                 src={products[2].image}
                 alt={products[2].title}
