@@ -7,7 +7,10 @@ export async function NewCollection() {
     return null
   }
   const handles = products!.map(
-    (product) => `products/${product.title.toLowerCase().replace(/ /g, '-')}`
+    (product) =>
+      `products/${product.title.toLowerCase().replace(/ /g, '-')}?id=${
+        product.id
+      }`
   )
 
   return (

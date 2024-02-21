@@ -2,7 +2,10 @@ import type { Product } from '@/app/types/Product'
 export default function CardComponent({ product }: { product: Product }) {
   const handle = product.title.toLowerCase().replace(/ /g, '-')
   return (
-    <a href={`/products/${handle}`} className="group block overflow-hidden">
+    <a
+      href={`/products/${handle}?id=${product.id}`}
+      className="group block overflow-hidden"
+    >
       <div className="relative h-[250px] sm:h-[350px]">
         <img
           src={product.image}
