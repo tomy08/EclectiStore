@@ -1,5 +1,5 @@
-import ProductCard from '../store/product-card'
-import ProductWrapper from '../store/product-wrapper'
+import ProductCard from '../store-page/product-card'
+import ProductWrapper from '../store-page/product-wrapper'
 import { getProducts } from '@/app/services/products'
 
 export default async function SimilarProducts({

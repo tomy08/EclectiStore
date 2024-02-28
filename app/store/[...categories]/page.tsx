@@ -1,5 +1,5 @@
-import ProductWrapper from '@/app/components/store/product-wrapper'
-import Card from '@/app/components/store/product-card'
+import ProductWrapper from '@/app/components/store-page/product-wrapper'
+import Card from '@/app/components/store-page/product-card'
 
 import {
   getCollectionProducts,

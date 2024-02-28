@@ -1,6 +1,6 @@
 import { getProducts } from '../services/products'
-import Card from '@/app/components/store/product-card'
-import CardWrapper from '../components/store/product-wrapper'
+import Card from '@/app/components/store-page/product-card'
+import CardWrapper from '../components/store-page/product-wrapper'
 export default async function Store() {
   const products = await getProducts()
   return (

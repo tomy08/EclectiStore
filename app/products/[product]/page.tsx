@@ -1,8 +1,9 @@
 import { getProducts } from '@/app/services/products'
 
-import ProductNotFound from '@/app/components/product/product-not-found'
-import ProductView from '@/app/components/product/product-view'
-import SimilarProducts from '@/app/components/product/similar-products'
+import ProductNotFound from '@/app/components/product-page/product-not-found'
+import ProductView from '@/app/components/product-page/product-view'
+import SimilarProducts from '@/app/components/product-page/similar-products'
+import { redirect } from 'next/navigation'
 
 interface ProductPageProps {
   searchParams: {
@@ -12,6 +13,10 @@ interface ProductPageProps {
 
 export default async function ProductPage({ searchParams }: ProductPageProps) {
   const id = searchParams.id
+
+  if (!id) {
+    redirect('/store')
+  }
 
   const products = await getProducts(id)
   const product = products![0]

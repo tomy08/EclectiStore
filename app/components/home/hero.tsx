@@ -6,7 +6,7 @@ export function Hero() {
       <div className="mx-auto max-w-3xl text-center">
         <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl ">
           EclectiStore
-          <span className="sm:block">
+          <span className="sm:block mt-2">
             Elevate Your Lifestyle with Every Purchase!
           </span>
         </h1>
