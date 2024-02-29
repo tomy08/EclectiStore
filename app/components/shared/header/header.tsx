@@ -1,6 +1,10 @@
+import Link from 'next/link'
 import List from './list'
+import { validateAccessToken } from '@/app/utils/auth/validateAccessToken'
 
-export function Header() {
+export async function Header() {
+  const customer = await validateAccessToken()
+
   return (
     <header className="bg-white dark:bg-gray-900">
       <div className="mx-auto flex h-16 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
@@ -13,12 +17,21 @@ export function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <a
-              className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
-              href="/signup"
-            >
-              Sign In
-            </a>
+            {customer.firstName ? (
+              <div className="w-10 h-10 rounded-full border-2 border-gray-500 text-center m-auto text-black font-bold overflow-hidden">
+                <img
+                  src={`https://api.dicebear.com/7.x/personas/svg?seed=${customer.firstName}&backgroundType=gradientLinear&backgroundColor=b6e3f4,c0aede`}
+                  alt="Account"
+                />
+              </div>
+            ) : (
+              <Link
+                className="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700 dark:hover:bg-teal-500"
+                href="/signup"
+              >
+                Sign In
+              </Link>
+            )}
 
             <button className=" rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 dark:bg-gray-800 dark:text-white dark:hover:text-white/75">
               <svg

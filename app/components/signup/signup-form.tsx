@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react'
-import { handleCreateUser } from '@/app/actions/actions'
+import { handleCreateUser } from '@/app/actions'
+import Link from 'next/link'
 
 export default function SignupForm() {
   const [error, setError] = useState<string | null>(null)
@@ -61,6 +62,16 @@ export default function SignupForm() {
       >
         Sign up
       </button>
+      <p className="text-sm text-center text-gray-500 mt-2 dark:text-gray-400">
+        Already have an account?{' '}
+        <Link
+          href="/login"
+          className="text-gray-700 underline dark:text-gray-200"
+        >
+          Log in
+        </Link>
+        .
+      </p>
     </form>
   )
 }

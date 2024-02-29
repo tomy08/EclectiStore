@@ -1,6 +1,19 @@
-export default function SignupForm() {
+'use client'
+
+import { handleLoginUser } from '@/app/actions'
+import Link from 'next/link'
+
+export default function LoginForm() {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    await handleLoginUser(formData)
+  }
   return (
-    <form className="flex flex-col w-full max-w-md mt-10">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col w-full max-w-md mt-10"
+    >
       <input
         type="email"
         id="email"
@@ -17,10 +30,20 @@ export default function SignupForm() {
       />
       <button
         type="submit"
-        className="border-blue-500 text-white font-bold rounded-full p-2 mt-8"
+        className="border-2 border-blue-900 text-white font-bold rounded-full p-2 mt-8 hover:bg-blue-900  focus:outline-none"
       >
-        Sign up
+        Login
       </button>
+      <p className="text-sm text-center text-gray-500 mt-2 dark:text-gray-400">
+        Already have an account?{' '}
+        <Link
+          href="/signup"
+          className="text-gray-700 underline dark:text-gray-200"
+        >
+          Sign up
+        </Link>
+        .
+      </p>
     </form>
   )
 }

@@ -16,7 +16,7 @@ export async function handleCreateUser(fd: FormData) {
     },
   }
 
-  const { customerCreate } = await graphqlClient.request(
+  const { customerCreate }: any = await graphqlClient.request(
     createUserMutation,
     variables
   )
@@ -27,6 +27,18 @@ export async function handleCreateUser(fd: FormData) {
       formDataObject.email as string,
       formDataObject.password as string
     )
+    redirect('/store')
+  }
+}
+
+export async function handleLoginUser(fd: FormData) {
+  const formDataObject = Object.fromEntries(fd)
+
+  const accessToken = await createAccessToken(
+    formDataObject.email as string,
+    formDataObject.password as string
+  )
+  if (accessToken) {
     redirect('/store')
   }
 }

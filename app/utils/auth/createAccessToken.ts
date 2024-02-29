@@ -2,25 +2,28 @@ import { GraphQLClientSingleton } from '@/app/graphql'
 import { customerAccessTokenCreateMutation } from '@/app/graphql/mutations/customerAccessTokenCreate'
 import { cookies } from 'next/headers'
 
-export const createAccessToken = (email: string, password: string) => {
+export const createAccessToken = async (email: string, password: string) => {
   const cookiesStore = cookies()
   const graphqlClient = GraphQLClientSingleton.getInstance().getClient()
-  const { customerAccessTokenCreate } = graphqlClient.request(
+  const { customerAccessTokenCreate }: any = await graphqlClient.request(
     customerAccessTokenCreateMutation,
     {
-      email,
-      password,
+      email: email,
+      password: password,
     }
   )
+
   const { accessToken, expiresAt } =
-    customerAccessTokenCreate.customerAccessToken
+    customerAccessTokenCreate?.customerAccessToken
 
   if (accessToken) {
     cookiesStore.set('accessToken', accessToken, {
-      expires: new Date(expiresAt),
       path: '/',
+      expires: new Date(expiresAt),
       httpOnly: true,
       sameSite: 'strict',
     })
+
+    return accessToken
   }
 }
