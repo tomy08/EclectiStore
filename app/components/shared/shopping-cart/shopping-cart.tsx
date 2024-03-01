@@ -47,10 +47,16 @@ export function ShoppingCart({ handleCloseCart }: ShoppingCartProps) {
               <ShoppingCartItem key={cartItem.product.id} cartItem={cartItem} />
             ))
           ) : (
-            <p>No items in your cart</p>
+            <li>No items in your cart</li>
           )}
         </ul>
 
+        <div className="flex justify-between">
+          <span className="text-gray-400">Total:</span>
+          <span className="text-gray-100">
+            ${shoppingCart?.totalPrice.toFixed(2)}
+          </span>
+        </div>
         <div className="space-y-4 text-center">
           <Link
             href="/checkout"

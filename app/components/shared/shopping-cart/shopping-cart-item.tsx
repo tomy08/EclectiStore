@@ -45,7 +45,7 @@ export default function ShoppingCartItem({ cartItem }: { cartItem: CartItem }) {
 
         <p className="mt-0.5 space-y-px text-[10px] text-gray-300">
           ${cartItem.product.price} x {cartItem.quantity} = $
-          {Number(cartItem.product.price) * cartItem.quantity}
+          {(Number(cartItem.product.price) * cartItem.quantity).toFixed(2)}
         </p>
       </div>
 
