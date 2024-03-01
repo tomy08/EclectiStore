@@ -1,7 +1,6 @@
 import { Product } from '@/app/types/Product'
 
-import QuantityInput from './quantity-input'
-import AddToMyCartButton from './add-to-my-cart-button'
+import BuyProductComponent from './buy-product-component'
 
 export default function ProductView({ product }: { product: Product }) {
   return (
@@ -21,11 +20,7 @@ export default function ProductView({ product }: { product: Product }) {
         </span>
         <p className="py-4 max-w-lg text-pretty">{product.description}</p>
         <p className="md:text-3xl text-2xl font-bold">${product.price}</p>
-
-        <div className="flex gap-2 mt-8">
-          <QuantityInput />
-          <AddToMyCartButton />
-        </div>
+        <BuyProductComponent product={product} />
       </div>
     </div>
   )
