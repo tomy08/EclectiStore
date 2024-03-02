@@ -5,4 +5,5 @@ export interface Product {
   price: string
   tags: string
   image: string
+  gql_id: string
 }

@@ -24,13 +24,17 @@ export function ShoppingCartProvider({
 }: {
   children: React.ReactNode
 }) {
-  const [shoppingCart, setShoppingCart] = useState<ShoppingCart | null>(() => {
-    const savedCart = localStorage.getItem('shoppingCart')
-    if (savedCart) {
-      return JSON.parse(savedCart)
-    }
-    return null
-  })
+  const [shoppingCart, setShoppingCart] = useState<ShoppingCart | null>(null)
+
+  useEffect(() => {
+    setShoppingCart(() => {
+      const savedCart = localStorage.getItem('shoppingCart')
+      if (savedCart) {
+        return JSON.parse(savedCart)
+      }
+      return null
+    })
+  }, [])
 
   useEffect(() => {
     localStorage.setItem('shoppingCart', JSON.stringify(shoppingCart))

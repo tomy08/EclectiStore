@@ -1,6 +1,7 @@
 import { Collection } from '../types/Collection'
 import type { Product } from '../types/Product'
 import type { ShopifyProduct } from '../types/ShopifyProduct'
+import { refactoredProducts } from './products'
 export const getCollections = async () => {
   try {
     const response = await fetch(
@@ -39,13 +40,9 @@ export const getCollectionProducts = async (id: string) => {
     )
     const { products } = await res.json()
 
-    const data: Product[] = products.map((product: ShopifyProduct) => ({
-      id: product.id,
-      title: product.title,
-      description: product.body_html,
-      tags: product.tags,
-      image: product.images[0].src,
-    }))
+    const data: Product[] = products.map((product: ShopifyProduct) =>
+      refactoredProducts(product)
+    )
 
     return data
   } catch (error) {

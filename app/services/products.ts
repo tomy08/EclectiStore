@@ -1,6 +1,30 @@
 import type { Product } from '../types/Product'
 import type { ShopifyProduct } from '../types/ShopifyProduct'
 
+export const refactoredProducts = (product: ShopifyProduct): Product => {
+  if (product.variants) {
+    return {
+      id: product.id,
+      title: product.title,
+      description: product.body_html,
+      price: product.variants[0]?.price,
+      tags: product.tags,
+      image: product.images[0]?.src,
+      gql_id: product.variants[0]?.admin_graphql_api_id,
+    }
+  } else {
+    return {
+      id: product.id,
+      title: product.title,
+      description: product.body_html,
+      price: '0',
+      tags: product.tags,
+      image: product.images[0]?.src,
+      gql_id: '',
+    }
+  }
+}
+
 export const getProducts = async (id?: string) => {
   try {
     const apiUrl = id
@@ -15,14 +39,9 @@ export const getProducts = async (id?: string) => {
 
     const { products } = await res.json()
 
-    const data: Product[] = products.map((product: ShopifyProduct) => ({
-      id: product.id,
-      title: product.title,
-      description: product.body_html,
-      price: product.variants[0].price,
-      tags: product.tags,
-      image: product.images[0].src,
-    }))
+    const data: Product[] = products.map((product: ShopifyProduct) =>
+      refactoredProducts(product)
+    )
 
     return data
   } catch (error) {
@@ -42,13 +61,9 @@ export const getMainProducts = async () => {
 
     const { products } = await res.json()
 
-    const data: Product[] = products.map((product: ShopifyProduct) => ({
-      id: product.id,
-      title: product.title,
-      description: product.body_html,
-      tags: product.tags,
-      image: product.images[0].src,
-    }))
+    const data: Product[] = products.map((product: ShopifyProduct) =>
+      refactoredProducts(product)
+    )
 
     return data
   } catch (error) {

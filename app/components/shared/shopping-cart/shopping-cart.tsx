@@ -3,6 +3,8 @@
 import Link from 'next/link'
 import ShoppingCartItem from './shopping-cart-item'
 import { useShoppingCartState } from '@/app/context/shopping-cart-context'
+import { useState } from 'react'
+import { handleCreateCart } from '@/app/actions'
 
 type ShoppingCartProps = {
   handleCloseCart: () => void
@@ -10,6 +12,20 @@ type ShoppingCartProps = {
 
 export function ShoppingCart({ handleCloseCart }: ShoppingCartProps) {
   const { shoppingCart } = useShoppingCartState()
+  const [isBuying, setIsBuying] = useState(false)
+  const handleBuy = async () => {
+    try {
+      setIsBuying(true)
+      const chekoutUrl = await handleCreateCart(shoppingCart?.items!)
+      if (!chekoutUrl) throw new Error('Error creating checkout')
+      localStorage.removeItem('shoppingCart')
+      window.location.href = chekoutUrl
+    } catch (error) {
+      console.error('error', error)
+    } finally {
+      setIsBuying(false)
+    }
+  }
 
   return (
     <div
@@ -57,14 +73,13 @@ export function ShoppingCart({ handleCloseCart }: ShoppingCartProps) {
             ${shoppingCart?.totalPrice.toFixed(2)}
           </span>
         </div>
-        <div className="space-y-4 text-center">
-          <Link
-            href="/checkout"
-            onClick={handleCloseCart}
-            className="block rounded bg-gray-500 px-5 py-3 text-sm text-gray-100 transition hover:bg-gray-600"
+        <div className="space-y-4 text-center flex flex-col justify-center items-center">
+          <button
+            onClick={handleBuy}
+            className="block rounded w-full bg-cyan-700 px-10 py-3 text-sm text-gray-100 transition hover:bg-cyan-800"
           >
             Checkout
-          </Link>
+          </button>
 
           <Link
             href="/store"
