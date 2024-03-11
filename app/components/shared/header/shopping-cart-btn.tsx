@@ -12,8 +12,6 @@ export default function ShoppingCartBtn() {
   }
 
   useEffect(() => {
-    console.log(shoppingCart?.totalItems)
-
     if (shoppingCart?.totalItems) {
       setChangeCart(true)
     }
