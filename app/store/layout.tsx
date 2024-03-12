@@ -11,7 +11,7 @@ export default async function Layout({
 
   return (
     <section className="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-      <nav className="p-2">
+      <nav className="p-2 gap-2 flex sm:flex-wrap  overflow-x-auto">
         {collections.map((collection) => (
           <Link
             key={collection.id}
