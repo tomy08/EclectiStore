@@ -18,7 +18,7 @@ export async function Header() {
           </nav>
 
           <div className="flex items-center gap-4">
-            {customer.firstName ? (
+            {customer?.firstName ? (
               <div className="w-10 h-10 rounded-full border-2 border-gray-500 text-center m-auto text-black font-bold overflow-hidden">
                 <img
                   src={`https://api.dicebear.com/7.x/personas/svg?seed=${customer.firstName}&backgroundType=gradientLinear&backgroundColor=b6e3f4,c0aede`}
